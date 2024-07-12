@@ -20,6 +20,7 @@ class TripsRepository:
             )
         )
         self.__connection.commit()
+        cursor.close()
 
     def find_trip_by_id(self, trip_id: str) -> tuple:
         cursor = self.__connection.cursor()
@@ -30,6 +31,7 @@ class TripsRepository:
             """, (trip_id,)
         )
         trip = cursor.fetchone()
+        cursor.close()
         return trip
     
     def update_trip_status(self, trip_id: str) -> None:
@@ -42,3 +44,4 @@ class TripsRepository:
             """, (trip_id,)
         )
         self.__connection.commit()
+        cursor.close()

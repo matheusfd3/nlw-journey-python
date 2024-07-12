@@ -17,6 +17,7 @@ class EmailsToInviteRepository:
             )
         )
         self.__connection.commit()
+        cursor.close()
 
     def find_emails_from_trip(self, trip_id: str) -> list:
         cursor = self.__connection.cursor()
@@ -27,4 +28,5 @@ class EmailsToInviteRepository:
             """, (trip_id,)
         )
         emails = cursor.fetchall()
+        cursor.close()
         return emails
