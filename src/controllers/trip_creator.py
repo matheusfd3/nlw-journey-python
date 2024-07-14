@@ -1,4 +1,5 @@
 import uuid
+from src.drivers.email_sender import send_email
 
 class TripCreator:
     def __init__(self, trip_repository, emails_repository):
@@ -26,6 +27,9 @@ class TripCreator:
                     }
                     self.__emails_repository.registry_email(email_infos)
             
+            send_email([body['owner_email']], 
+                       f'http://localhost:3000/trips/{trip_id}/confirm')
+
             return {
                 'body': {
                     'id': trip_id
